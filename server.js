@@ -9,6 +9,8 @@ import {
   askAI
 } from "./logic.js";
 
+const EMAIL = "sanchali1202.be23@chitkara.edu.in";
+
 dotenv.config();
 
 const app = express();
@@ -20,14 +22,13 @@ app.use(express.json());
 app.get("/health",(req,res)=>{
     res.status(200).json({
         is_success : true,
-        official_email : "sanchali1202.be23@chitkara.edu.in"
+        official_email : EMAIL
     })
 })
 app.post("/bfhl", async (req, res) => {
   try {
     const body = req.body;
 
-    //  Body must exist
     if (!body || typeof body !== "object") {
       return res.status(400).json({
         is_success: false,
@@ -35,7 +36,6 @@ app.post("/bfhl", async (req, res) => {
       });
     }
 
-    //  Exactly one key required
     const keys = Object.keys(body);
     if (keys.length !== 1) {
       return res.status(400).json({
@@ -47,7 +47,6 @@ app.post("/bfhl", async (req, res) => {
     const key = keys[0];
     let data;
 
-    //  Handle each valid key
     if (key === "fibonacci") {
       if (!Number.isInteger(body[key]) || body[key] < 0) {
         return res.status(400).json({
@@ -98,7 +97,6 @@ app.post("/bfhl", async (req, res) => {
       data = await askAI(body[key]);
     }
 
-    // 4️⃣ Unsupported key
     else {
       return res.status(400).json({
         is_success: false,
@@ -106,7 +104,6 @@ app.post("/bfhl", async (req, res) => {
       });
     }
 
-    // ✅ SUCCESS RESPONSE (STRICT FORMAT)
     return res.status(200).json({
       is_success: true,
       official_email: EMAIL,
@@ -114,7 +111,6 @@ app.post("/bfhl", async (req, res) => {
     });
 
   } catch (error) {
-    // ❌ SERVER ERROR
     return res.status(500).json({
       is_success: false,
       message: "Internal server error"
@@ -122,7 +118,7 @@ app.post("/bfhl", async (req, res) => {
   }
 });
 
-const PORT = 1234;
+const PORT = 3000;
 app.listen(PORT,()=>{
     console.log(`Server running on port ${PORT}`);
 })
