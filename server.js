@@ -1,6 +1,7 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: "./.env" });
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import {
   fibonacci,
   isPrime,
@@ -11,7 +12,6 @@ import {
 
 const EMAIL = "sanchali1202.be23@chitkara.edu.in";
 
-dotenv.config();
 
 const app = express();
 

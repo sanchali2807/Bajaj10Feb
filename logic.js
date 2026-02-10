@@ -1,4 +1,5 @@
 import axios from "axios";
+console.log("ENV KEY LOADED:", process.env.GEMINI_API_KEY);
 
 export const fibonacci = (n) => {
   const result = [];
@@ -12,7 +13,7 @@ export const fibonacci = (n) => {
   return result;
 };
 
-o
+
 export const isPrime = (num) => {
   if (num < 2) return false;
   for (let i = 2; i * i <= num; i++) {
